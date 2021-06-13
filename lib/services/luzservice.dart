@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:intl/intl.dart';
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
@@ -20,7 +21,7 @@ LuzServiceResult _parsePreus(String responseBody) {
 }
 
 class Preu {
-  final String day;
+  final DateTime day;
   final int hour;
   final double price;
   final String zone;
@@ -34,7 +35,7 @@ class Preu {
 
   factory Preu.fromJson(Map<String, dynamic> json) {
     return Preu(
-      day: json['day'] as String,
+      day: DateFormat('dd/MM/yyyy').parse(json['day']),
       hour: json['hour'] as int,
       price: json['price'] as double,
       zone: json['zone'] as String,

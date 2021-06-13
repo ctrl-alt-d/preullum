@@ -12,9 +12,13 @@ class MyCardsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final now = new DateTime.now().hour;
+    final hour = new DateTime.now().hour;
+    final day = new DateTime.now().day;
     List<MyCardWidget> cartes = luzServiceResult.preus
-        .where((preu) => !nomesFutur || preu.hour >= now)
+        .where((preu) =>
+            !nomesFutur ||
+            preu.day.day > day ||
+            (preu.day.day == day && preu.hour >= hour - 2))
         .map((preu) =>
             MyCardWidget(preu: preu, luzServiceResult: luzServiceResult))
         .toList();

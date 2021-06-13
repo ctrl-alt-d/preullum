@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:my_app2/services/luzservice.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
@@ -45,6 +46,7 @@ class MyDetailedData extends StatelessWidget {
   Widget build(BuildContext context) {
     final periode = "${preu.hour.toString().padLeft(2, '0')}:00h";
     final preuTxt = "${(preu.price * 100).toStringAsFixed(1).padLeft(4, ' ')}";
+    final diaTxt = DateFormat('dd/MM/yyyy').format(preu.day);
     final fontSize = MediaQuery.of(context).size.width * 0.04;
     return Row(
       children: [
@@ -56,7 +58,9 @@ class MyDetailedData extends StatelessWidget {
         ),
         Padding(
           padding: EdgeInsets.fromLTRB(0, 0, 4, 2),
-          child: Text(preu.day, style: TextStyle(fontSize: fontSize, fontWeight: FontWeight.w100)),
+          child: Text(diaTxt,
+              style:
+                  TextStyle(fontSize: fontSize, fontWeight: FontWeight.w100)),
         ),
         Padding(
           padding: EdgeInsets.fromLTRB(0, 0, 4, 2),
